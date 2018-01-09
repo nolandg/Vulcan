@@ -4,18 +4,25 @@ import checks from '../modules/checks';
 import { Link } from 'react-router';
 import ReactMarkdown from 'react-markdown';
 
-const Step = ({ step, text, children }) => (
+const Step = ({ step, text, after, children }) => (
   <div className="step">
-
     <div className="step-text">
       <ReactMarkdown source={text} />
     </div>
-    
+
     <div className="step-contents">{children}</div>
 
     {checks[`step${step}`]() && (
       <div className="step-done">
-        Well done! You can now <Link to={`/${step + 1}`}>move on to Step {step + 1}</Link>.
+        {after && (
+          <div className="step-after">
+            <ReactMarkdown source={after} />
+          </div>
+        )}
+
+        <div className="step-next">
+          You can now <Link to={`/step/${step + 1}`}>move on to Step {step + 1}</Link>.
+        </div>
       </div>
     )}
   </div>

@@ -1,4 +1,8 @@
-import { Routes, Components } from 'meteor/vulcan:core';
+import { Routes, Components, Collections } from 'meteor/vulcan:core';
+
+const containsChild = (component, childName) => {
+  return !!component && component().props.children && component().props.children.type.name === childName;
+}
 
 const checks = {
 
@@ -15,8 +19,19 @@ const checks = {
   },
 
   step4: () => {
-    const c = Components.Step4;
-    return !!c && c().props.children && c().props.children.type.name === 'ModalTrigger'
+    return containsChild(Components.Step5, 'ModalTrigger');
+  },
+
+  step5: () => {
+    return containsChild(Components.Step5, 'Schema');
+  },
+
+  step6: () => {
+    return Collections.find(c => c.options.collectionName === 'Movies');
+  },
+
+  step7: () => {
+    return containsChild(Components.Step7, 'GraphQLSchema');
   }
 
 }

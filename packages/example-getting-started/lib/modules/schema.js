@@ -20,7 +20,7 @@ const schema = {
     insertableBy: ['members'],
     editableBy: ['members'],
   },
-  
+
   review: {
     label: 'Review',
     type: String,

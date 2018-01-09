@@ -13,6 +13,9 @@ import schema from './schema.js';
 Movies collection definition
 
 */
+
+
+
 const Movies = createCollection({
 
   collectionName: 'Movies',
@@ -21,22 +24,24 @@ const Movies = createCollection({
 
   schema,
   
-  resolvers: getDefaultResolvers('Movies'),
+  // resolvers: getDefaultResolvers('Movies'),
 
-  mutations: getDefaultMutations('Movies'),
+  // mutations: getDefaultMutations('Movies'),
 
 });
+export default Movies;
+
+
 
 /*
 
 Permissions for members (regular users)
 
 */
-const membersActions = [
-  'movies.new',
-  'movies.edit.own',
-  'movies.remove.own',
-];
-Users.groups.members.can(membersActions);
+// const membersActions = [
+//   'movies.new',
+//   'movies.edit.own',
+//   'movies.remove.own',
+// ];
+// Users.groups.members.can(membersActions);
 
-export default Movies;
