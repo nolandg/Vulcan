@@ -28,7 +28,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { intlShape } from 'meteor/vulcan:i18n';
 import { withApollo, compose } from 'react-apollo';
-import { Components, registerComponent, withCurrentUser, Utils, withNew, withEdit, withRemove } from 'meteor/vulcan:core';
+import { Components, registerComponent, withCurrentUser, Utils, withNew, withEdit, withRemove, getFragment } from 'meteor/vulcan:core';
 import Form from './Form.jsx';
 import gql from 'graphql-tag';
 import { withDocument } from 'meteor/vulcan:core';
@@ -102,6 +102,14 @@ class FormWrapper extends PureComponent {
     }
     if (this.props.mutationFragment) {
       mutationFragment = typeof this.props.mutationFragment === 'string' ? gql`${this.props.mutationFragment}` : this.props.mutationFragment;
+    }
+    
+    // same with queryFragmentName and mutationFragmentName
+    if (this.props.queryFragmentName) {
+      queryFragment = getFragment(this.props.queryFragmentName);
+    }
+    if (this.props.mutationFragmentName) {
+      mutationFragment = getFragment(this.props.mutationFragmentName);
     }
 
     // if any field specifies extra queries, add them
@@ -228,7 +236,9 @@ FormWrapper.propTypes = {
   documentId: PropTypes.string, // if a document is passed, this will be an edit form
   schema: PropTypes.object, // usually not needed
   queryFragment: PropTypes.object,
+  queryFragmentName: PropTypes.string,
   mutationFragment: PropTypes.object,
+  mutationFragmentName: PropTypes.string,
 
   // graphQL
   newMutation: PropTypes.func, // the new mutation

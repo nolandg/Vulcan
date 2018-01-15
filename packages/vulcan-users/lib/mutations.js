@@ -9,7 +9,7 @@ const mutations = {
 
   new: {
     
-    name: 'usersNew',
+    name: 'UsersNew',
     
     check(user, document) {
       if (!user) return false;
@@ -33,7 +33,7 @@ const mutations = {
 
   edit: {
     
-    name: 'usersEdit',
+    name: 'UsersEdit',
     
     check(user, document) {
       if (!user || !document) return false;
@@ -60,7 +60,7 @@ const mutations = {
   
   remove: {
 
-    name: 'usersRemove',
+    name: 'UsersRemove',
     
     check(user, document) {
       if (!user || !document) return false;
