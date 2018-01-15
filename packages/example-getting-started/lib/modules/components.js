@@ -10,3 +10,5 @@ import '../components/steps/Step4.jsx'; // <- uncomment me!
 import '../components/steps/Step5.jsx';
 import '../components/steps/Step6.jsx';
 import '../components/steps/Step7.jsx';
+import '../components/steps/Step8.jsx';
+import '../components/steps/Step9.jsx';

@@ -28,7 +28,7 @@ Once you do, your collection should appear in the list below:
 `;
 
 const after = `
-As you can see, out of the box Vulcan already includes a \`Users\` collection, as well as a few other collections used for debugging purposes while in development mode)
+As you can see, out of the box Vulcan already includes a \`Users\` collection, used to store users and manage accounts. 
 `;
 
 const Step6 = () => (

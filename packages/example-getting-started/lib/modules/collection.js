@@ -24,11 +24,12 @@ const Movies = createCollection({
 
   schema,
   
-  // resolvers: getDefaultResolvers('Movies'),
+  resolvers: getDefaultResolvers('Movies'), // uncomment during Step 9
 
   // mutations: getDefaultMutations('Movies'),
 
 });
+
 export default Movies;
 
 

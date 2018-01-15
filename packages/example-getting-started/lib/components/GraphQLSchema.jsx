@@ -1,17 +1,17 @@
 import React from 'react';
-import { registerComponent, GraphQLSchema } from 'meteor/vulcan:core';
+import { registerComponent, Loading } from 'meteor/vulcan:core';
 import checks from '../modules/checks';
 import { Link } from 'react-router';
-import ReactMarkdown from 'react-markdown';
 
-console.log(GraphQLSchema)
-
-const GraphQLSchemaComponent = ({}) => (
+const GraphQLSchema = ({ data }) => (
   <div className="graphql-schema">
-    <pre>
-      <code>{GraphQLSchema.finalSchema[0]}</code>
-    </pre>
+    {data && (data.loading ? 
+      <Components.Loading /> : 
+      <pre>
+        <code>{data.SchemaContents}</code>
+      </pre>
+    )}
   </div>
 );
 
-registerComponent('GraphQLSchema', GraphQLSchemaComponent);
+registerComponent('GraphQLSchema', GraphQLSchema);

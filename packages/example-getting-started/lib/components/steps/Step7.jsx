@@ -1,6 +1,8 @@
 import React from 'react';
 import { Components, registerComponent, Collections } from 'meteor/vulcan:core';
 
+import withGraphQLSchema from '../../hocs/withGraphQLSchema.js';
+
 const text = `
 ## The GraphQL Schema
 
@@ -10,16 +12,25 @@ Collection schemas are used to make sure your data is properly formatted before 
 
 Every GraphQL API endpoint needs a schema to indicate what data should be made available to clients, and in Vulcan that *GraphQL* schema is automatically generated for you from the *JavaScript* schema you wrote in Step 5. 
 
-To visualize it, just find this component's code in \`lib/components/steps/Step7.jsx\` and uncomment the \`Components.GraphQLSchema\` component.
+That GraphQL schema lives on the server, so in order to visualize it we need some way of fetching it from the client. 
+
+Find the \`lib/components/steps/Step7.jsx\` file for this component, and uncomment the last argument of the \`registerComponent\` call, \`withGraphQLSchema\`.
 `;
 
 const after = `
+Congrats, you can now behold your GraphQL schema in all its glory!
+
+By the way, \`withGraphQLSchema\` is what's known as a **higher-order component**, or “HoC” for short. These are functions you can call on a component to perform special actions (such as querying the server) and passing them special props (such as the results of that query).
+
+We'll learn more about them later, but for now all you need to know is that the first argument of \`registerComponent\` is the component name, the second is the component itself, and any additional arguments will be treated as HoCs and called on the component whenever it's used in your app. 
+
+You don't need to know how HoCs are written in order to use them, but if you're curious then you can learn more in the [Apollo documentation](https://www.apollographql.com/docs/react/basics/queries.html).
 `;
 
-const Step7 = () => (
-  <Components.Step step={7} text={text} after={after}>
-    <Components.GraphQLSchema/>
+const Step7 = ({ data }) => (
+  <Components.Step step={7} text={text} after={after} data={data}>
+    <Components.GraphQLSchema data={data}/>
   </Components.Step>
 );
 
-registerComponent('Step7', Step7);
+registerComponent('Step7', Step7, /* withGraphQLSchema */);

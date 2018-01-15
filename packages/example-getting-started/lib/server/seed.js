@@ -4,7 +4,7 @@ Seed the database with some dummy content.
 
 */
 
-import Movies from '../modules/movies/collection.js';
+import Movies from '../modules/collection.js';
 import Users from 'meteor/vulcan:users';
 import { newMutation } from 'meteor/vulcan:core';
 
@@ -68,20 +68,20 @@ const createUser = function (username, email) {
   });
 }
 
-var createDummyUsers = function () {
-  console.log('// inserting dummy users…');
+const createDummyUsers = function () {
+  console.log('// seeding users…');
   createUser('Bruce', 'dummyuser1@telescopeapp.org');
   createUser('Arnold', 'dummyuser2@telescopeapp.org');
   createUser('Julia', 'dummyuser3@telescopeapp.org');
 };
 
-Meteor.startup(function () {
+export const seedMovies = () => {
   if (Users.find().fetch().length === 0) {
     createDummyUsers();
   }
   const currentUser = Users.findOne(); // just get the first user available
   if (Movies.find().fetch().length === 0) {
-    console.log('// creating dummy movies');
+    console.log('// seeding movies…');
     seedData.forEach(document => {
       newMutation({
         collection: Movies,
@@ -91,4 +91,4 @@ Meteor.startup(function () {
       });
     });
   }
-});
+};

@@ -8,4 +8,5 @@ addRoute({ name: 'step4', path: '/step/4', componentName: 'Step4' }); // <- writ
 addRoute({ name: 'step5', path: '/step/5', componentName: 'Step5' });
 addRoute({ name: 'step6', path: '/step/6', componentName: 'Step6' });
 addRoute({ name: 'step7', path: '/step/7', componentName: 'Step7' });
-// addRoute({ name: 'step8', path: '/step/8', componentName: 'Step8' });
+addRoute({ name: 'step8', path: '/step/8', componentName: 'Step8' });
+addRoute({ name: 'step9', path: '/step/9', componentName: 'Step9' });

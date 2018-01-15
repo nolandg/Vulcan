@@ -30,8 +30,16 @@ const checks = {
     return Collections.find(c => c.options.collectionName === 'Movies');
   },
 
-  step7: () => {
-    return containsChild(Components.Step7, 'GraphQLSchema');
+  step7: (props) => {
+    return props.data;
+  },
+
+  step8: (props) => {
+    return !!(props.data && props.data.MoviesCount);
+  },
+
+  step9: (props) => {
+    return props.data && props.data.__type && !!props.data.__type.fields.find(r => r.name === 'MoviesList');
   }
 
 }
