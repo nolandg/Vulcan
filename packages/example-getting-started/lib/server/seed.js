@@ -76,13 +76,18 @@ const createDummyUsers = function () {
 };
 
 export const seedMovies = () => {
-  if (Users.find().fetch().length === 0) {
+  
+  const allUsers = Users.find().fetch();
+
+  if (allUsers.length === 0) {
     createDummyUsers();
   }
-  const currentUser = Users.findOne(); // just get the first user available
   if (Movies.find().fetch().length === 0) {
     console.log('// seeding movies…');
     seedData.forEach(document => {
+  
+      const currentUser = _.sample(allUsers); // get a random user
+      
       newMutation({
         collection: Movies,
         document: document, 

@@ -4,7 +4,7 @@ import { Components, registerComponent, withList } from 'meteor/vulcan:core';
 import Movies from '../../modules/collection.js';
 
 const text = `
-## Field Resolvers
+## Datatables
 
 Let's keep learning how to harness the power of GraphQL. One of GraphQL's coolest features is that you're not limited to the fields that are in your database. In fact, GraphQL couldn't care less about your database: it only follows what *you* specify. 
 
@@ -20,8 +20,7 @@ resolveAs: {
   type: 'User',
   resolver: async (movie, args, context) => {
     return await context.Users.loader.load(movie.userId);
-  },
-  addOriginalField: true,
+  }
 },
 ~~~
 
@@ -30,7 +29,6 @@ We're specifying a few things here:
 - Our new GraphQL schema field should be named \'user\'. 
 - It should return an object of type \`User\` (which is the \`Users\` collection's type, as defined in the \`vulcan:users\` core package).
 - To get that object, it should execute the function included as the \`resolver\` property.
-- We want to also add the original field (\`userId\`) to the GraphQL schema in case we need it. 
 
 That function's first argument is the current document, in other words whichever movie is currently being fetched through the GraphQL endpoint. The second is any query arguments for that specific field (in this case we can ignore it), and the third is the \`context\`, which provides easy access to all existing collections including \`Users\`. 
 

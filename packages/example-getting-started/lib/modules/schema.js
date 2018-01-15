@@ -10,6 +10,14 @@ const schema = {
     type: String,
     optional: true,
     viewableBy: ['guests'],
+    resolveAs: {
+      fieldName: 'user',
+      type: 'User',
+      resolver: async (movie, args, context) => {
+        return await context.Users.loader.load(movie.userId);
+      },
+      addOriginalField: true,
+    },
   },
 
   name: {

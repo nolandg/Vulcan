@@ -26,7 +26,7 @@ const Movies = createCollection({
   
   resolvers: getDefaultResolvers('Movies'), // uncomment during Step 9
 
-  // mutations: getDefaultMutations('Movies'),
+  mutations: getDefaultMutations('Movies'), // uncomment during Step 14
 
 });
 

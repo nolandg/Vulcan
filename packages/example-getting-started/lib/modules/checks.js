@@ -40,6 +40,30 @@ const checks = {
 
   step9: (props) => {
     return props.data && props.data.__type && !!props.data.__type.fields.find(r => r.name === 'MoviesList');
+  },
+
+  step10: (props) => {
+    return !!props.results;
+  },
+
+  step11: (props) => {
+    return props.results && props.results[0] && !props.results[0].description;
+  },
+
+  step12: (props) => {
+    return props.results && props.results[0] && props.results[0].user;
+  },
+
+  step13: (props) => {
+    return props.currentUser;
+  },
+
+  step14: (props) => {
+    return props.data && props.data.__type && !!props.data.__type.fields.find(r => r.name === 'MoviesNew');
+  },
+
+  step15: (props) => {
+    return true;
   }
 
 }
