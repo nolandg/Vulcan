@@ -24,7 +24,7 @@ export const validateDocument = (document, collection, context) => {
     // 1. check that the current user has permission to insert each field
     if (!fieldSchema || !Users.canInsertField (currentUser, fieldSchema)) {
       validationErrors.push({
-        id: 'app.disallowed_property_detected', 
+        id: 'app.disallowed_property_detected',
         fieldName
       });
     }
@@ -32,7 +32,7 @@ export const validateDocument = (document, collection, context) => {
     // 2. check field lengths
     if (fieldSchema.limit && value.length > fieldSchema.limit) {
       validationErrors.push({
-        id: 'app.field_is_too_long', 
+        id: 'app.field_is_too_long',
         data: {fieldName, limit: fieldSchema.limit}
       });
     }
@@ -43,19 +43,19 @@ export const validateDocument = (document, collection, context) => {
   });
 
   // 4. check that required fields have a value
-  _.keys(schema).forEach(fieldName => {
+  // _.keys(schema).forEach(fieldName => {
+  //
+  //   const fieldSchema = schema[fieldName];
+  //
+  //   if ((fieldSchema.required || !fieldSchema.optional) && typeof document[fieldName] === 'undefined') {
+  //     validationErrors.push({
+  //       id: 'app.required_field_missing',
+  //       data: {fieldName}
+  //     });
+  //   }
+  //
+  // });
 
-    const fieldSchema = schema[fieldName];
-
-    if ((fieldSchema.required || !fieldSchema.optional) && typeof document[fieldName] === 'undefined') {
-      validationErrors.push({
-        id: 'app.required_field_missing', 
-        data: {fieldName}
-      });
-    }
-
-  });
-  
   // 5. still run SS validation for now for backwards compatibility
   try {
     collection.simpleSchema().validate(document);
@@ -81,7 +81,7 @@ export const validateDocument = (document, collection, context) => {
   3. Check field types
   4. Check for missing fields
   5. Run SimpleSchema validation step (for now)
-  
+
 */
 export const validateModifier = (modifier, document, collection, context) => {
 
@@ -98,7 +98,7 @@ export const validateModifier = (modifier, document, collection, context) => {
     var field = schema[fieldName];
     if (!field || !Users.canEditField(currentUser, field, document)) {
       validationErrors.push({
-        id: 'app.disallowed_property_detected', 
+        id: 'app.disallowed_property_detected',
         fieldName
       });
     }
@@ -112,7 +112,7 @@ export const validateModifier = (modifier, document, collection, context) => {
     // 2. check field lengths
     if (fieldSchema.limit && value.length > fieldSchema.limit) {
       validationErrors.push({
-        id: 'app.field_is_too_long', 
+        id: 'app.field_is_too_long',
         data: {fieldName, limit: fieldSchema.limit}
       });
     }
@@ -125,18 +125,18 @@ export const validateModifier = (modifier, document, collection, context) => {
   // 4. check that required fields have a value
   // when editing, we only want to require fields that are actually part of the form
   // so we make sure required keys are present in the $unset object
-  _.keys(schema).forEach(fieldName => {
-
-    const fieldSchema = schema[fieldName];
-
-    if (unset[fieldName] && (fieldSchema.required || !fieldSchema.optional) && typeof set[fieldName] === 'undefined') {
-      validationErrors.push({
-        id: 'app.required_field_missing', 
-        data: {fieldName}
-      });
-    }
-
-  });
+  // _.keys(schema).forEach(fieldName => {
+  //
+  //   const fieldSchema = schema[fieldName];
+  //
+  //   if (unset[fieldName] && (fieldSchema.required || !fieldSchema.optional) && typeof set[fieldName] === 'undefined') {
+  //     validationErrors.push({
+  //       id: 'app.required_field_missing',
+  //       data: {fieldName}
+  //     });
+  //   }
+  //
+  // });
 
   // 5. still run SS validation for now for backwards compatibility
   try {
